@@ -1,0 +1,4 @@
+The files in this directory were obtained from the following repository:
+https://github.com/vstoneofficial/megarover_samples
+maintainer: Vstone
+license: MIT

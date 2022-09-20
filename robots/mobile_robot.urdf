@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+
+<robot name="MobileRobot">
+
+  <link name="Chassis">
+    <visual>
+      <geometry>
+         <mesh filename="package://choreonoid_ros_mobile_robot_tutorial/meshes/vmega_body.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+         <mesh filename="package://choreonoid_ros_mobile_robot_tutorial/meshes/vmega_body.dae"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="14.0"/>
+        <inertia ixx="0.11" ixy="0" ixz="0" iyy="0.20" iyz="0" izz="0.27"/>
+    </inertial>
+  </link>
+
+  <link name="RightWheel">
+    <visual>
+      <geometry>
+         <mesh filename="package://choreonoid_ros_mobile_robot_tutorial/meshes/vmega_wheel.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+         <mesh filename="package://choreonoid_ros_mobile_robot_tutorial/meshes/vmega_wheel.dae"/>
+      </geometry>
+    </collision>
+    <inertial>
+       <mass value="0.8"/>
+       <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.02" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="LeftWheel">
+    <visual>
+      <geometry>
+         <mesh filename="package://choreonoid_ros_mobile_robot_tutorial/meshes/vmega_wheel.dae"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 3.14159265"/>
+    </visual>
+    <collision>
+      <geometry>
+         <mesh filename="package://choreonoid_ros_mobile_robot_tutorial/meshes/vmega_wheel.dae"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 3.14159265"/>
+    </collision>
+    <inertial>
+       <mass value="0.8"/>
+       <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.02" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <joint name="RightWheel" type="continuous">
+    <parent link="Chassis"/>
+    <child link="RightWheel"/>
+    <origin xyz="0 -0.142 0.075" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <joint name="LeftWheel" type="continuous">
+    <parent link="Chassis"/>
+    <child link="LeftWheel"/>
+    <origin xyz="0 0.142 0.075" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+</robot>

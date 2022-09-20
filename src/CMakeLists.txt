@@ -1,0 +1,2 @@
+choreonoid_add_simple_controller(MobileRobotController MobileRobotController.cpp)
+target_link_libraries(MobileRobotController ${roscpp_LIBRARIES})

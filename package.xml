@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>choreonoid_ros_mobile_robot_tutorial</name>
+  <version>1.0.0</version>
+  <description>Tutorial for ROS Japan UG #47</description>
+  <maintainer email="nakaoka@choreonoid.co.jp">Shin'ichiro Nakaoka</maintainer>
+  <license>MIT</license>
+  <author email="nakaoka@choreonoid.co.jp">Shin'ichiro Nakaoka</author>
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>choreonoid</depend>
+  <depend>choreonoid_ros</depend>
+  <depend>choreonoid_joy</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>image_transport</depend>
+  <export>
+    <build_type>cmake</build_type>
+  </export>
+</package>
