@@ -25,7 +25,7 @@ links:
           -
             type: RangeSensor
             name: VLP_16
-            optical_frame_rotation: [ [ 1, 0, 0, 90 ], [ 0, 1, 0, -90 ] ]
+            optical_frame: robotics
             yaw_range: 360.0
             yaw_step:  0.4
             pitch_range: 30.0
@@ -37,7 +37,8 @@ links:
           -
             type: Camera
             name: RealSense
-            optical_frame_rotation: [ [ 1, 0, 0, 90 ], [ 0, 1, 0, -90 ] ]
+            rotation: [ [ 0, 1, 0, 90 ], [ 0 , 0, 1, -90 ]  ]
+            optical_frame: cv
             format: COLOR_DEPTH
             field_of_view: 62
             width: 320

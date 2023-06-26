@@ -70,4 +70,30 @@
     <axis xyz="0 1 0"/>
   </joint>
 
+  <!-- VLP-16 -->
+  <link name="VLP_16">
+    <!-- <visual>
+      <geometry>
+        <cylinder radius="0.03" length="0.02"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual> -->
+  </link>
+
+  <joint name="VLP_16FixedJoint" type="fixed">
+    <parent link="Chassis"/>
+    <child link="VLP_16"/>
+    <origin xyz="0 0 0.2"/>
+  </joint>
+
+  <!-- RealSense -->
+  <link name="RealSense"/>
+
+  <joint name="RealSenseFixedJoint" type="fixed">
+    <parent link="Chassis"/>
+    <child link="RealSense"/>
+    <origin xyz="0 0 0.2" rpy="-1.57 0 -1.57"/>
+  </joint>
 </robot>

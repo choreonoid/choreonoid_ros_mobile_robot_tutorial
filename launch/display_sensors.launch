@@ -7,9 +7,6 @@
   <remap from="/joint_states" to="/MobileRobot/joint_states" />
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
-  <node pkg="tf" type="static_transform_publisher" name="VLP_16_broadcaster" args="0 0 0.2 0 0 0 Chassis VLP_16 100" />
-  <node pkg="tf" type="static_transform_publisher" name="RealSense_broadcaster" args="0 0 0.2 0 0 0 Chassis RealSense 100" />
-
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
   <node pkg="rqt_graph" name="rqt_graph" type="rqt_graph" />
 </launch>
