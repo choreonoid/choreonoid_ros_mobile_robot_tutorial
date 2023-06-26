@@ -1,0 +1,204 @@
+optionalPlugins: [ ODE ]
+
+items: 
+  id: 0
+  name: "RootItem"
+  plugin: Base
+  class: RootItem
+  is_builtin_item: true
+  children: 
+    - 
+      id: 1
+      name: "World"
+      plugin: Body
+      class: WorldItem
+      data: 
+        collision_detection: false
+        collision_detector: AISTCollisionDetector
+        default_material_table_file: "${SHARE}/default/materials.yaml"
+      children: 
+        - 
+          id: 2
+          name: "MobileRobot"
+          plugin: Body
+          class: BodyItem
+          is_checked: true
+          data: 
+            file: "../robots/mobile_robot.urdf"
+            format: CHOREONOID-BODY
+            rootPosition: [ 0, 0, 0 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointDisplacements: [ 0, 0 ]
+            jointPositions: [ 0, 0 ]
+            initialRootPosition: [ 0, 0, 0 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            initialJointPositions: [ 0, 0 ]
+            fix_root: false
+            collisionDetection: true
+            selfCollisionDetection: false
+            location_editable: true
+            scene_sensitive: true
+            zmp: [ 0, 0, 0 ]
+          children: 
+            - 
+              id: 3
+              name: "BodyROS"
+              plugin: ROS
+              class: BodyROSItem
+              data: 
+                body_ros_version: 0
+                joint_state_update_rate: 100
+            - 
+              id: 4
+              name: "Controller"
+              plugin: Body
+              class: SimpleControllerItem
+              data: 
+                isNoDelayMode: false
+                controllerOptions: ""
+                controller: "MobileRobotController"
+                base_directory: "Controller directory"
+                reloading: false
+                export_symbols: false
+        - 
+          id: 5
+          name: "Labo1"
+          plugin: Body
+          class: BodyItem
+          is_checked: true
+          data: 
+            file: "${SHARE}/model/Labo1/Labo1v2.body"
+            format: CHOREONOID-BODY
+            rootPosition: [ 0, 0, -0.1 ]
+            rootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            jointDisplacements: [ 0 ]
+            jointPositions: [ 0 ]
+            initialRootPosition: [ 0, 0, -0.1 ]
+            initialRootAttitude: [ 
+              1, 0, 0, 
+              0, 1, 0, 
+              0, 0, 1 ]
+            initialJointPositions: [ 0 ]
+            fix_root: true
+            collisionDetection: true
+            selfCollisionDetection: false
+            location_editable: true
+            scene_sensitive: true
+            zmp: [ 0, 0, 0 ]
+        - 
+          id: 6
+          name: "AISTSimulator"
+          plugin: Body
+          class: AISTSimulatorItem
+          data: 
+            timeStep: 0.001
+            realtimeSync: true
+            recording: "full"
+            timeRangeMode: "Unlimited"
+            timeLength: 180
+            active_control_time_range_mode: false
+            allLinkPositionOutputMode: false
+            deviceStateOutput: true
+            controllerThreads: true
+            recordCollisionData: false
+            controllerOptions: ""
+            scene_view_edit_mode_blocking: false
+            dynamicsMode: "Forward dynamics"
+            integrationMode: "Runge Kutta"
+            gravity: [ 0, 0, -9.80665 ]
+            min_friction_coefficient: 0
+            max_friction_coefficient: 100
+            cullingThresh: 0.005
+            contactCullingDepth: 0.05
+            errorCriterion: 0.001
+            maxNumIterations: 25
+            contactCorrectionDepth: 0.00025
+            contactCorrectionVelocityRatio: 5
+            kinematicWalking: false
+            2Dmode: false
+            oldAccelSensorMode: false
+          children: 
+            - 
+              id: 7
+              name: "GLVisionSimulator"
+              plugin: Body
+              class: GLVisionSimulatorItem
+              data: 
+                enabled: true
+                max_frame_rate: 1000
+                max_latency: 1
+                record_vision_data: true
+                thread_mode: Sensor
+                best_effort: true
+                all_scene_objects: true
+                range_sensor_precision_ratio: 2
+                depth_error: 0
+                enable_head_light: true
+                enable_additional_lights: true
+                antialiasing: false
+        - 
+          id: 8
+          name: "ODESimulator"
+          plugin: ODE
+          class: ODESimulatorItem
+          data: 
+            time_step: 0.001
+            realtime_sync_mode: compensatory
+            recording: full
+            time_range_mode: unlimited
+            time_length: 180
+            is_active_control_time_range_mode: false
+            output_all_link_positions: true
+            output_device_states: true
+            use_controller_threads: true
+            record_collision_data: false
+            controller_options: ""
+            block_scene_view_edit_mode: false
+            time_sync_items: [ 6, 9 ]
+            stepMode: Iterative (quick step)
+            gravity: [ 0, 0, -9.80665 ]
+            friction: 1
+            jointLimitMode: false
+            globalERP: 0.4
+            globalCFM: 1.0e-10
+            numIterations: 50
+            overRelaxation: 1.3
+            limitCorrectingVel: true
+            maxCorrectingVel: 1.0e-3
+            2Dmode: false
+            useWorldCollisionDetector: false
+          children: 
+            - 
+              id: 9
+              name: "GLVisionSimulator"
+              plugin: Body
+              class: GLVisionSimulatorItem
+              data: 
+                enabled: true
+                max_frame_rate: 1000
+                max_latency: 1
+                record_vision_data: true
+                thread_mode: Sensor
+                best_effort: true
+                all_scene_objects: true
+                range_sensor_precision_ratio: 2
+                depth_error: 0
+                enable_head_light: true
+                enable_additional_lights: true
+                antialiasing: false
+        - 
+          id: 10
+          name: "WorldROS"
+          plugin: ROS
+          class: WorldROSItem
+          data: 
+            max_clock_publishing_rate: 100
