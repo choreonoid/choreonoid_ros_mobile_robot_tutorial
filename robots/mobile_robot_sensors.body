@@ -55,6 +55,15 @@ links:
             appearance:
               material:
                 diffuseColor: [ 0, 0, 1 ]
+          - 
+            type: SpotLight
+            name: Light
+            direction: [ 1, 0, 0 ]
+            beam_width: 36
+            cut_off_angle: 40
+            cut_off_exponent: 6
+            attenuation: [ 1, 0, 0.01 ]
+            on: true
   -
     name: RightWheel
     parent: Chassis
