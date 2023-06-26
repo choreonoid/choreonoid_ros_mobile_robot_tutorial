@@ -88,6 +88,14 @@
     <origin xyz="0 0 0.2"/>
   </joint>
 
+  <sensor name="VLP_16" update_rate="20">
+    <parent link="VLP_16"/>
+    <ray>
+      <horizontal samples="900" resolution="1" min_angle="0" max_angle="6.28"/>
+      <vertical samples="16" resolution="1" min_angle="0" max_angle="0.52"/>
+    </ray>
+  </sensor>
+
   <!-- RealSense -->
   <link name="RealSense"/>
 
@@ -96,4 +104,11 @@
     <child link="RealSense"/>
     <origin xyz="0 0 0.2" rpy="-1.57 0 -1.57"/>
   </joint>
+
+  <sensor name="RealSense" update_rate="30">
+    <parent link="RealSense"/>
+    <camera>
+      <image width="320" height="240" depth_format="mono16" format="rgb8" hfov="1.19" near="0.01" far="100"/>
+    </camera>
+  </sensor>
 </robot>
