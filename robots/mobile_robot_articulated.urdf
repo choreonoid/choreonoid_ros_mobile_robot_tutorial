@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+
+<robot name="MobileRobot">
+
+  <link name="Chassis">
+    <visual>
+      <geometry>
+        <mesh filename="package://choreonoid_ros_mobile_robot_tutorial/meshes/vmega_body.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://choreonoid_ros_mobile_robot_tutorial/meshes/vmega_body.dae"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="14.0"/>
+      <inertia ixx="0.11" ixy="0" ixz="0" iyy="0.20" iyz="0" izz="0.27"/>
+    </inertial>
+  </link>
+
+  <link name="RightWheel">
+    <visual>
+      <geometry>
+        <mesh filename="package://choreonoid_ros_mobile_robot_tutorial/meshes/vmega_wheel.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://choreonoid_ros_mobile_robot_tutorial/meshes/vmega_wheel.dae"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.8"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.02" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="LeftWheel">
+    <visual>
+      <geometry>
+        <mesh filename="package://choreonoid_ros_mobile_robot_tutorial/meshes/vmega_wheel.dae"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 3.14159265"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://choreonoid_ros_mobile_robot_tutorial/meshes/vmega_wheel.dae"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 3.14159265"/>
+    </collision>
+    <inertial>
+      <mass value="0.8"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.02" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="PanLink">
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="TiltLink">
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <joint name="RightWheel" type="continuous">
+    <parent link="Chassis"/>
+    <child link="RightWheel"/>
+    <origin xyz="0 -0.142 0.075" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <joint name="LeftWheel" type="continuous">
+    <parent link="Chassis"/>
+    <child link="LeftWheel"/>
+    <origin xyz="0 0.142 0.075" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <joint name="PanJoint" type="revolute">
+    <parent link="Chassis"/>
+    <child link="PanLink"/>
+    <origin xyz="0 0 0.2" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.14" upper="3.14" velocity="1" effort="1"/>
+  </joint>
+
+  <joint name="TiltJoint" type="revolute">
+    <parent link="PanLink"/>
+    <child link="TiltLink"/>
+    <origin xyz="0 0 0.1" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-0.52" upper="0.52" velocity="1" effort="1"/>
+  </joint>
+
+  <!-- VLP-16 -->
+  <link name="VLP_16">
+    <!-- <visual>
+      <geometry>
+        <cylinder radius="0.03" length="0.02"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual> -->
+  </link>
+
+  <joint name="VLP_16FixedJoint" type="fixed">
+    <parent link="TiltLink"/>
+    <child link="VLP_16"/>
+  </joint>
+
+  <sensor name="VLP_16" update_rate="20">
+    <parent link="VLP_16"/>
+    <ray>
+      <horizontal samples="900" resolution="1" min_angle="0" max_angle="6.28"/>
+      <vertical samples="16" resolution="1" min_angle="0" max_angle="0.52"/>
+    </ray>
+  </sensor>
+
+  <!-- RealSense -->
+  <link name="RealSense"/>
+
+  <joint name="RealSenseFixedJoint" type="fixed">
+    <parent link="TiltLink"/>
+    <child link="RealSense"/>
+    <origin xyz="0 0 0" rpy="-1.57 0 -1.57"/>
+  </joint>
+
+  <sensor name="RealSense" update_rate="30">
+    <parent link="RealSense"/>
+    <camera>
+      <image width="320" height="240" depth_format="mono16" format="rgb8" hfov="1.19" near="0.01"
+        far="100"/>
+    </camera>
+  </sensor>
+</robot>

@@ -1,0 +1,131 @@
+format: ChoreonoidBody
+formatVersion: 1.0
+angleUnit: degree
+name: MobileRobot
+rootLink: Chassis
+
+links:
+  -
+    name: Chassis
+    joint_type: free
+    center_of_mass: [ -0.061, 0, -0.0020 ]
+    mass: 14.0
+    inertia: [ 0.11, 0,     0,
+               0,     0.20, 0,
+               0,     0,     0.27 ]
+    material: Slider
+    elements:
+      -
+        type: Resource
+        uri: "../meshes/vmega_body.dae"
+  -
+    name: PanLink
+    parent: Chassis
+    translation: [ 0, 0, 0.2 ]
+    joint_name: PanJoint
+    joint_type: revolute
+    joint_id: 2
+    joint_axis: [ 0, 0, 1 ]
+    joint_range: [ -180, 180 ]
+    center_of_mass: [ 0, 0, 0 ]
+    mass: 0.1
+    inertia: [ 0.01, 0, 0,
+               0,    0.01, 0,
+               0,    0,    0.01 ]
+  -
+    name: TiltLink
+    parent: PanLink
+    translation: [ 0, 0, 0.1 ]
+    joint_name: TiltJoint
+    joint_type: revolute
+    joint_id: 3
+    joint_axis: [ 0, 1, 0 ]
+    joint_range: [ -30, 30 ]
+    center_of_mass: [ 0, 0, 0 ]
+    mass: 0.1
+    inertia: [ 0.01, 0, 0,
+               0,    0.01, 0,
+               0,    0,    0.01 ]
+    elements:
+      -
+        type: Transform
+        translation: [ 0, 0, 0 ]
+        elements:
+          -
+            type: RangeSensor
+            name: VLP_16
+            optical_frame: robotics
+            yaw_range: 360.0
+            yaw_step:  0.4
+            pitch_range: 30.0
+            pitch_step: 2.0
+            scan_rate:  20
+            max_distance: 100.0
+            detection_rate: 0.9
+            error_deviation: 0.01
+          -
+            type: Camera
+            name: RealSense
+            rotation: [ [ 0, 1, 0, 90 ], [ 0 , 0, 1, -90 ]  ]
+            optical_frame: cv
+            format: COLOR_DEPTH
+            field_of_view: 62
+            width: 320
+            height: 240
+            frame_rate: 30
+            detection_rate: 0.9
+            error_deviation: 0.005
+          -
+            type: Shape
+            rotation: [ 1, 0, 0, 90 ]
+            geometry:
+              type: Cylinder
+              radius: 0.03
+              height: 0.02
+            appearance:
+              material:
+                diffuseColor: [ 0, 0, 1 ]
+          - 
+            type: SpotLight
+            name: Light
+            direction: [ 1, 0, 0 ]
+            beam_width: 36
+            cut_off_angle: 40
+            cut_off_exponent: 6
+            attenuation: [ 1, 0, 0.01 ]
+            on: true
+  -
+    name: RightWheel
+    parent: Chassis
+    translation: [ 0, -0.142, 0.075 ]
+    joint_type: revolute
+    joint_id: 0
+    joint_axis: [ 0, 1, 0 ]
+    center_of_mass: [ 0, 0, 0 ]
+    mass: 0.8
+    inertia: [ 0.01, 0, 0,
+               0,    0.02, 0,
+               0,    0,    0.01 ]
+    material: Tire
+    elements:
+      -
+        type: Resource
+        uri: "../meshes/vmega_wheel.dae"
+  -
+    name: LeftWheel
+    parent: Chassis
+    translation: [ 0, 0.142, 0.075 ]
+    joint_type: revolute
+    joint_id: 1
+    joint_axis: [ 0, 1, 0 ]
+    center_of_mass: [ 0, 0, 0 ]
+    mass: 0.8
+    inertia: [ 0.01, 0, 0,
+               0,    0.02, 0,
+               0,    0,    0.01 ]
+    material: Tire
+    elements:
+      -
+        type: Resource
+        uri: "../meshes/vmega_wheel.dae"
+        rotation: [ 0, 0, 1, 180 ]
