@@ -1,0 +1,26 @@
+<launch>
+  <arg name="model" default="$(find choreonoid_ros_mobile_robot_tutorial)/robots/mobile_robot_articulated.urdf"/>
+
+  <!-- robot description -->
+  <param name="/MobileRobot/robot_description" command="$(find xacro)/xacro '$(arg model)'"/>
+
+  <!-- choreonoid -->
+  <param name="/use_sim_time" value="true"/>
+  <node pkg="choreonoid_ros" type="choreonoid" name="chorenoid" args="$(find choreonoid_ros_mobile_robot_tutorial)/project/mobile_robot_ros_control.cnoid">
+    <remap from="MobileRobot/base_controller/cmd_vel" to="cmd_vel"/>
+  </node>
+
+  <!-- state publisher -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" ns="MobileRobot" respawn="true"/>
+  
+  <!-- load ros controllers -->
+  <rosparam file="$(find choreonoid_ros_mobile_robot_tutorial)/config/base_controller.yaml" command="load"/>
+  <rosparam file="$(find choreonoid_ros_mobile_robot_tutorial)/config/camera_controller.yaml" command="load"/>
+  <node name="controller_spawner" pkg="controller_manager"
+		type="spawner" output="screen" respawn="true"
+		args="--namespace MobileRobot base_controller camera_controller"/>
+
+  <!-- GUI controllers -->
+  <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering" ns="MobileRobot"/>
+  <node name="rqt_joint_trajectory_controller" pkg="rqt_joint_trajectory_controller" type="rqt_joint_trajectory_controller" ns="MobileRobot"/>
+</launch>

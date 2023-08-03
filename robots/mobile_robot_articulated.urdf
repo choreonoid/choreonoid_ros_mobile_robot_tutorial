@@ -100,6 +100,51 @@
     <limit lower="-0.52" upper="0.52" velocity="1" effort="1"/>
   </joint>
 
+  <!-- transmissions for ros_control -->
+  <transmission name="RightWheelTrans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RightWheel">
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RightWheelMotor">
+      <mechanicalReduction>1</mechanicalReduction>
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <transmission name="LeftWheelTrans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="LeftWheel">
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LeftWheelMotor">
+      <mechanicalReduction>1</mechanicalReduction>
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <transmission name="PanJointTrans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="PanJoint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="PanJointMotor">
+      <mechanicalReduction>1</mechanicalReduction>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+  <transmission name="TiltJointTrans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="TiltJoint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="TiltJointMotor">
+      <mechanicalReduction>1</mechanicalReduction>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
   <!-- VLP-16 -->
   <link name="VLP_16">
     <!-- <visual>
