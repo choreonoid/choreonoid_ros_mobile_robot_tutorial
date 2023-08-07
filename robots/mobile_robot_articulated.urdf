@@ -61,6 +61,30 @@
       <mass value="0.1"/>
       <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
     </inertial>
+
+    <visual>
+      <origin xyz="0 0 -0.025"/>
+      <geometry>
+        <cylinder radius="0.08" length="0.02"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0 0.06 0.03"/>
+      <geometry>
+        <box size="0.02 0.02 0.12"/>
+      </geometry>
+      <material name="grey"/>
+      </visual>
+    <visual>
+      <origin xyz="0 -0.06 0.03"/>
+      <geometry>
+        <box size="0.02 0.02 0.12"/>
+      </geometry>
+      <material name="grey"/>
+      </visual>
   </link>
 
   <link name="TiltLink">
@@ -68,6 +92,16 @@
       <mass value="0.1"/>
       <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
     </inertial>
+
+    <visual>
+      <origin xyz="0 0 -0.02"/>
+      <geometry>
+        <cylinder radius="0.06" length="0.02"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
   </link>
 
   <joint name="RightWheel" type="continuous">
@@ -147,17 +181,18 @@
 
   <!-- VLP-16 -->
   <link name="VLP_16">
-    <!-- <visual>
+    <visual>
       <geometry>
-        <cylinder radius="0.03" length="0.02"/>
+        <cylinder radius="0.05165" length="0.0727"/>
       </geometry>
       <material name="blue">
         <color rgba="0 0 1 1"/>
       </material>
-    </visual> -->
+    </visual>
   </link>
 
   <joint name="VLP_16FixedJoint" type="fixed">
+    <origin xyz="0 0 0.0287"/>
     <parent link="TiltLink"/>
     <child link="VLP_16"/>
   </joint>
@@ -171,12 +206,18 @@
   </sensor>
 
   <!-- RealSense -->
-  <link name="RealSense"/>
+  <link name="RealSense">
+    <visual>
+      <geometry>
+        <mesh filename="package:// choreonoid_ros_mobile_robot_tutorial/meshes/d435.dae"/>
+      </geometry>
+    </visual>
+  </link>
 
   <joint name="RealSenseFixedJoint" type="fixed">
     <parent link="TiltLink"/>
     <child link="RealSense"/>
-    <origin xyz="0 0 0" rpy="-1.57 0 -1.57"/>
+    <origin xyz="0 0 0.1" rpy="-1.57 0 -1.57"/>
   </joint>
 
   <sensor name="RealSense" update_rate="30">

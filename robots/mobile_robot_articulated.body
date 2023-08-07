@@ -32,6 +32,36 @@ links:
     inertia: [ 0.01, 0, 0,
                0,    0.01, 0,
                0,    0,    0.01 ]
+    elements:
+      - 
+        type: Shape
+        translation: [ 0, 0, -0.025 ]
+        rotation: [ 1, 0, 0, 90 ]
+        geometry:
+          type: Cylinder
+          radius: 0.08
+          height: 0.02
+        appearance:
+          material:
+            diffuseColor: [ 0.5, 0.5, 0.5 ]
+      -
+        type: Shape
+        translation: [ 0, 0.06, 0.03 ]
+        geometry:
+          type: Box
+          size: [ 0.02, 0.02, 0.12 ]
+        appearance:
+          material:
+            diffuseColor: [ 0.5, 0.5, 0.5 ]  
+      -
+        type: Shape
+        translation: [ 0, -0.06, 0.03 ]
+        geometry:
+          type: Box
+          size: [ 0.02, 0.02, 0.12 ]
+        appearance:
+          material:
+            diffuseColor: [ 0.5, 0.5, 0.5 ]  
   -
     name: TiltLink
     parent: PanLink
@@ -49,7 +79,7 @@ links:
     elements:
       -
         type: Transform
-        translation: [ 0, 0, 0 ]
+        translation: [ 0, 0, 0.0287 ]
         elements:
           -
             type: RangeSensor
@@ -64,9 +94,23 @@ links:
             detection_rate: 0.9
             error_deviation: 0.01
           -
+            type: Shape
+            rotation: [ 1, 0, 0, 90 ]
+            geometry:
+              type: Cylinder
+              radius: 0.05165
+              height: 0.0727
+            appearance:
+              material:
+                diffuseColor: [ 0, 0, 1 ]
+      -
+        type: Transform
+        translation: [ 0, 0, 0.1 ]
+        elements:
+          -
             type: Camera
             name: RealSense
-            rotation: [ [ 0, 1, 0, 90 ], [ 0 , 0, 1, -90 ]  ]
+            rotation: [ [ 0, 1, 0, 90 ], [ 0 , 0, 1, -90 ] ]
             optical_frame: cv
             format: COLOR_DEPTH
             field_of_view: 62
@@ -76,16 +120,28 @@ links:
             detection_rate: 0.9
             error_deviation: 0.005
           -
-            type: Shape
-            rotation: [ 1, 0, 0, 90 ]
-            geometry:
-              type: Cylinder
-              radius: 0.03
-              height: 0.02
+            type: Resource
+            rotation: [ [ 0, 1, 0, 90 ], [ 0, 0, 1, 90 ] ]
+            uri: "../meshes/d435.dae"
             appearance:
               material:
                 diffuseColor: [ 0, 0, 1 ]
-          - 
+      -
+        type: Transform
+        translation: [ 0, 0, 0 ]
+        elements:
+          -
+            type: Shape
+            translation: [ 0, 0, -0.02 ]
+            rotation: [ 1, 0, 0, 90 ]
+            geometry:
+              type: Cylinder
+              radius: 0.06
+              height: 0.02
+            appearance:
+              material:
+                diffuseColor: [ 1, 1, 1 ]
+          -
             type: SpotLight
             name: Light
             direction: [ 1, 0, 0 ]
