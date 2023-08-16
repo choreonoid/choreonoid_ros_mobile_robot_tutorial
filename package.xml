@@ -9,10 +9,12 @@
   <buildtool_depend>catkin</buildtool_depend>
   <depend>choreonoid</depend>
   <depend>choreonoid_ros</depend>
-  <depend>choreonoid_joy</depend>
   <depend>std_msgs</depend>
   <depend>sensor_msgs</depend>
   <depend>image_transport</depend>
+  <depend>joy</depend>
+  <exec_depend>teleop_twist_joy</exec_depend>
+  <exec_depend>teleop_twist_keyboard</exec_depend>
   <exec_depend>ros_control</exec_depend>
   <exec_depend>ros_controllers</exec_depend>
   <exec_depend>rqt_robot_steering</exec_depend>
