@@ -8,4 +8,4 @@ https://github.com/IntelRealSense/realsense-ros
 maintainer: LibRealSense ROS Team
 license: Apache License 2.0
 
-Note that the number of faces in vmega_body.dae and vmega_wheel.dae were reduced from their original files.
+Note that the number of faces were reduced from the original files.
