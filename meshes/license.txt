@@ -1,4 +1,11 @@
-The files in this directory were obtained from the following repository:
+The files in this directory were obtained from the following repositories:
+
 https://github.com/vstoneofficial/megarover_samples
 maintainer: Vstone
 license: MIT
+
+https://github.com/IntelRealSense/realsense-ros
+maintainer: LibRealSense ROS Team
+license: Apache License 2.0
+
+Note that the number of faces in vmega_body.dae and vmega_wheel.dae were reduced from their original files.
