@@ -24,7 +24,7 @@ items:
           class: BodyItem
           is_checked: true
           data: 
-            file: "../robots/mobile_robot.urdf"
+            file: "../robot/mobile_robot.urdf"
             format: CHOREONOID-BODY
             rootPosition: [ 0, 0, 0 ]
             rootAttitude: [ 
@@ -62,7 +62,7 @@ items:
               data: 
                 isNoDelayMode: false
                 controllerOptions: ""
-                controller: "MobileRobotController"
+                controller: "MobileRobotTwistController"
                 base_directory: "Controller directory"
                 reloading: false
                 export_symbols: false

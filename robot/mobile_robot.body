@@ -8,7 +8,7 @@ links:
   -
     name: Chassis
     joint_type: free
-    center_of_mass: [ -0.061, 0, -0.0020 ]
+    center_of_mass: [ -0.06, 0, 0.076 ]
     mass: 14.0
     inertia: [ 0.11, 0,     0,
                0,     0.20, 0,
@@ -17,10 +17,10 @@ links:
     elements:
       -
         type: Shape
-        translation: [ -0.1, 0, 0.08 ]
+        translation: [ -0.1, 0, 0.0975 ]
         geometry:
           type: Box
-          size: [ 0.36, 0.24, 0.1 ]
+          size: [ 0.36, 0.24, 0.135 ]
       -
         type: Shape
         translation: [ -0.255, 0, 0.02 ]
@@ -31,7 +31,7 @@ links:
   -
     name: RightWheel
     parent: Chassis
-    translation: [ 0, -0.142, 0.075 ]
+    translation: [ 0, -0.14, 0.076 ]
     joint_type: revolute
     joint_id: 0
     joint_axis: [ 0, 1, 0 ]
@@ -51,11 +51,11 @@ links:
           division_number: 60
         appearance:
           material:
-            diffuseColor: [ 0.4, 0.4, 0.4 ]
+            diffuseColor: [ 0.2, 0.2, 0.2 ]
   -
     name: LeftWheel
     parent: Chassis
-    translation: [ 0, 0.142, 0.075 ]
+    translation: [ 0, 0.142, 0.076 ]
     joint_type: revolute
     joint_id: 1
     joint_axis: [ 0, 1, 0 ]

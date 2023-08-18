@@ -1,5 +1,5 @@
 <launch>
-  <arg name="model" default="$(find choreonoid_ros_mobile_robot_tutorial)/robots/mobile_robot.urdf"/>
+  <arg name="model" default="$(find choreonoid_ros_mobile_robot_tutorial)/robot/mobile_robot.urdf"/>
   <arg name="rvizconfig" default="$(find choreonoid_ros_mobile_robot_tutorial)/config/mobile_robot.rviz" />
   <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
   <remap from="/joint_states" to="/MobileRobot/joint_states" />

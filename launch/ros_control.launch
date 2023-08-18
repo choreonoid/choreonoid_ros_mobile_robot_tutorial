@@ -1,5 +1,5 @@
 <launch>
-  <arg name="model" default="$(find choreonoid_ros_mobile_robot_tutorial)/robots/mobile_robot_articulated.urdf"/>
+  <arg name="model" default="$(find choreonoid_ros_mobile_robot_tutorial)/robot/mobile_robot_articulated.urdf"/>
 
   <!-- robot description -->
   <param name="/MobileRobot/robot_description" command="$(find xacro)/xacro '$(arg model)'"/>
