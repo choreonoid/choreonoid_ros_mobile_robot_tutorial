@@ -22,7 +22,7 @@ items:
           class: BodyItem
           is_checked: true
           data: 
-            file: "../robot/mobile_robot_mesh.body"
+            file: "${HOME}/catkin_ws/src/choreonoid_ros_mobile_robot_tutorial/robot/mobile_robot_mesh.body"
             format: CHOREONOID-BODY
             rootPosition: [ 0, 0, 0 ]
             rootAttitude: [ 
@@ -40,18 +40,22 @@ items:
             fix_root: false
             collisionDetection: true
             selfCollisionDetection: false
-            location_editable: true
+            lock_location: false
             scene_sensitive: true
             zmp: [ 0, 0, 0 ]
           children: 
             - 
               id: 3
-              name: "BodyROS"
-              plugin: ROS
-              class: BodyROSItem
+              name: "SimpleController"
+              plugin: Body
+              class: SimpleControllerItem
               data: 
-                body_ros_version: 0
-                joint_state_update_rate: 100
+                isNoDelayMode: false
+                controllerOptions: ""
+                controller: "MobileRobotController"
+                base_directory: "Controller directory"
+                reloading: false
+                export_symbols: false
         - 
           id: 4
           name: "Floor"
@@ -75,7 +79,7 @@ items:
             fix_root: true
             collisionDetection: true
             selfCollisionDetection: false
-            location_editable: false
+            lock_location: true
             scene_sensitive: true
             zmp: [ 0, 0, 0 ]
         - 
@@ -84,20 +88,20 @@ items:
           plugin: Body
           class: AISTSimulatorItem
           data: 
-            timeStep: 0.001
-            realtimeSync: true
-            recording: "full"
-            timeRangeMode: "Unlimited"
-            timeLength: 180
-            active_control_time_range_mode: false
-            allLinkPositionOutputMode: false
-            deviceStateOutput: true
-            controllerThreads: true
-            recordCollisionData: false
-            controllerOptions: ""
-            scene_view_edit_mode_blocking: false
+            time_step: 0.002
+            realtime_sync_mode: compensatory
+            recording: full
+            time_range_mode: unlimited
+            time_length: 180
+            is_active_control_time_range_mode: false
+            output_all_link_positions: false
+            output_device_states: true
+            use_controller_threads: true
+            record_collision_data: false
+            controller_options: ""
+            block_scene_view_edit_mode: false
             dynamicsMode: "Forward dynamics"
-            integrationMode: "Runge Kutta"
+            integrationMode: semi-implicit_euler
             gravity: [ 0, 0, -9.80665 ]
             min_friction_coefficient: 0
             max_friction_coefficient: 100
@@ -110,13 +114,6 @@ items:
             kinematicWalking: false
             2Dmode: false
             oldAccelSensorMode: false
-        - 
-          id: 6
-          name: "WorldROS"
-          plugin: ROS
-          class: WorldROSItem
-          data: 
-            max_clock_publishing_rate: 100
 views: 
   - 
     id: 0
@@ -161,9 +158,9 @@ views:
         - 
           camera: [ System, Perspective ]
           isCurrent: true
-          eye: [ 1.16266, 1.32499, 0.700855 ]
+          eye: [ 1.25552, 1.14892, 0.815757 ]
           direction: [ -0.680099, -0.617053, -0.395869 ]
-          up: [ -0.29318, -0.266002, 0.918307 ]
+          up: [ -0.293181, -0.266002, 0.918307 ]
         - 
           camera: [ System, Orthographic ]
           orthoHeight: 20
@@ -203,7 +200,6 @@ views:
     class: JointDisplacementView
     mounted: true
     state: 
-      show_selected_joints: false
       show_joint_ids: true
       show_joint_names: false
       overlap_joint_names: false
@@ -211,6 +207,7 @@ views:
       show_dials: true
       show_phases: true
       limit_ranges: false
+      show_selected_joints: false
   - 
     id: 6
     plugin: Body
@@ -244,10 +241,10 @@ views:
     mounted: true
 toolbars: 
   "TimeBar": 
-    current_time: 403.209
+    current_time: 0
     min_time: 0
     max_time: 4373.23
-    frame_rate: 1000
+    frame_rate: 500
     playback_frame_rate: 60
     idle_loop_driven_mode: false
     playback_speed_ratio: 1
@@ -269,18 +266,6 @@ Body:
   "BodySelectionManager": 
     current_body_item: 2
     current_link: "Chassis"
-  "EditableSceneBody": 
-    editableSceneBodies: 
-      - 
-        bodyItem: 2
-        show_cm: false
-        show_cm_projection: false
-        show_zmp: false
-      - 
-        bodyItem: 4
-        show_cm: false
-        show_cm_projection: false
-        show_zmp: false
   "KinematicFaultChecker": 
     checkJointPositions: true
     angleMargin: 0
@@ -290,6 +275,18 @@ Body:
     targetJoints: all
     checkSelfCollisions: true
     onlyTimeBarRange: false
+  "OperableSceneBody": 
+    scene_bodies: 
+      - 
+        body_item: 2
+        show_cm: false
+        show_cm_projection: false
+        show_zmp: false
+      - 
+        body_item: 4
+        show_cm: false
+        show_cm_projection: false
+        show_zmp: false
   "SplineFilterDialog": 
     isInputFrameRateSpecified: false
     inputFrameRate: 200
@@ -302,17 +299,17 @@ viewAreas:
     contents: 
       type: splitter
       orientation: horizontal
-      sizes: [ 714, 226 ]
+      sizes: [ 1414, 448 ]
       children: 
         - 
           type: splitter
           orientation: horizontal
-          sizes: [ 341, 369 ]
+          sizes: [ 318, 1092 ]
           children: 
             - 
               type: splitter
               orientation: vertical
-              sizes: [ 389, 389 ]
+              sizes: [ 571, 570 ]
               children: 
                 - 
                   type: pane
@@ -324,7 +321,7 @@ viewAreas:
             - 
               type: splitter
               orientation: vertical
-              sizes: [ 584, 194 ]
+              sizes: [ 856, 285 ]
               children: 
                 - 
                   type: pane
@@ -336,7 +333,7 @@ viewAreas:
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 214, 564 ]
+          sizes: [ 314, 827 ]
           children: 
             - 
               type: pane
@@ -344,7 +341,7 @@ viewAreas:
             - 
               type: splitter
               orientation: vertical
-              sizes: [ 310, 250 ]
+              sizes: [ 456, 367 ]
               children: 
                 - 
                   type: pane

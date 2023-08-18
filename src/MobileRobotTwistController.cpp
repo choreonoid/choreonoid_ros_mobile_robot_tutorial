@@ -3,34 +3,28 @@
 #include <geometry_msgs/Twist.h>
 #include <mutex>
 
-using namespace std;
-using namespace cnoid;
-
-
-class MobileRobotTwistController : public SimpleController
+class MobileRobotTwistController : public cnoid::SimpleController
 {
+public:
+    virtual bool initialize(cnoid::SimpleControllerIO* io) override;
+    void commandCallback(const geometry_msgs::Twist& twist);
+    virtual bool control() override;
+
+private:
+    cnoid::Link* wheels[2];
     std::unique_ptr<ros::NodeHandle> node;
     ros::Subscriber subscriber;
     geometry_msgs::Twist command;
     std::mutex commandMutex;
-    Link* wheels[2];
-    double dq_target[2];
-
-    virtual bool initialize(SimpleControllerIO* io) override;
-    void commandCallback(const geometry_msgs::Twist& twist);
-    virtual bool control() override;
 };
 
 CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(MobileRobotTwistController)
 
-
-bool MobileRobotTwistController::initialize(SimpleControllerIO* io)
+bool MobileRobotTwistController::initialize(cnoid::SimpleControllerIO* io)
 {
     auto body = io->body();
-
     wheels[0] = body->joint("RightWheel");
     wheels[1] = body->joint("LeftWheel");
-
     for(int i=0; i < 2; ++i){
         auto wheel = wheels[i];
         wheel->setActuationMode(JointTorque);
@@ -38,7 +32,7 @@ bool MobileRobotTwistController::initialize(SimpleControllerIO* io)
         io->enableOutput(wheel, JointTorque);
     }
 
-    node = make_unique<ros::NodeHandle>(body->name());
+    node = std::make_unique<ros::NodeHandle>(body->name());
     subscriber = node->subscribe(
         "/cmd_vel", 1, &MobileRobotTwistController::commandCallback, this);
     
@@ -62,8 +56,8 @@ bool MobileRobotTwistController::control()
         std::lock_guard<std::mutex> lock(commandMutex);
         double dq_x = command.linear.x / wheelRadius;
         double dq_yaw = command.angular.z * halfAxleWidth / wheelRadius;
-        dq_target[0] = dq_x - dq_yaw;
-        dq_target[1] = dq_x + dq_yaw;
+        dq_target[0] = dq_x + dq_yaw;
+        dq_target[1] = dq_x - dq_yaw;
     }
     
     for(int i=0; i < 2; ++i){

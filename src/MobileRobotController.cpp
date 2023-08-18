@@ -1,21 +1,22 @@
 #include <cnoid/SimpleController>
 
-using namespace cnoid;
-
-class MobileRobotController : public SimpleController
+class MobileRobotController : public cnoid::SimpleController
 {
-    Link* wheels[2];
-
-    virtual bool initialize(SimpleControllerIO* io) override;
+public:
+    virtual bool initialize(cnoid::SimpleControllerIO* io) override;
     virtual bool control() override;
+
+private:    
+    cnoid::Link* wheels[2];
 };
 
 CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(MobileRobotController)
 
-bool MobileRobotController::initialize(SimpleControllerIO* io)
+bool MobileRobotController::initialize(cnoid::SimpleControllerIO* io)
 {
-    wheels[0] = io->body()->joint("RightWheel");
-    wheels[1] = io->body()->joint("LeftWheel");
+    auto body = io->body();
+    wheels[0] = body->joint("RightWheel");
+    wheels[1] = body->joint("LeftWheel");
     for(int i=0; i < 2; ++i){
         auto wheel = wheels[i];
         wheel->setActuationMode(JointTorque);
@@ -26,7 +27,7 @@ bool MobileRobotController::initialize(SimpleControllerIO* io)
 
 bool MobileRobotController::control()
 {
-    wheel[0]->u() = 1.0;
-    wheel[0]->u() = -1.0;
+    wheels[0]->u() = 1.0;
+    wheels[1]->u() = 1.0;
     return true;
 }
