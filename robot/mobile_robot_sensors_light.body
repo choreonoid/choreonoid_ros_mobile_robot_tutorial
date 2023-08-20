@@ -1,8 +1,8 @@
 format: ChoreonoidBody
-formatVersion: 1.0
-angleUnit: degree
+format_version: 1.0
+angle_unit: degree
 name: MobileRobot
-rootLink: Chassis
+root_link: Chassis
 
 links:
   -
@@ -21,7 +21,7 @@ links:
   -
     name: PanLink
     parent: Chassis
-    translation: [ 0, 0, 0.2 ]
+    translation: [ -0.02, 0, 0.2 ]
     joint_name: PanJoint
     joint_type: revolute
     joint_id: 2
@@ -41,31 +41,27 @@ links:
           type: Cylinder
           radius: 0.08
           height: 0.02
-        appearance:
+        appearance: &GRAY
           material:
-            diffuseColor: [ 0.5, 0.5, 0.5 ]
+            diffuse: [ 0.5, 0.5, 0.5 ]
       -
         type: Shape
-        translation: [ 0, 0.06, 0.03 ]
+        translation: [ 0, 0.07, 0.03 ]
         geometry:
           type: Box
           size: [ 0.02, 0.02, 0.12 ]
-        appearance:
-          material:
-            diffuseColor: [ 0.5, 0.5, 0.5 ]  
+        appearance: *GRAY
       -
         type: Shape
-        translation: [ 0, -0.06, 0.03 ]
+        translation: [ 0, -0.07, 0.03 ]
         geometry:
           type: Box
           size: [ 0.02, 0.02, 0.12 ]
-        appearance:
-          material:
-            diffuseColor: [ 0.5, 0.5, 0.5 ]  
+        appearance: *GRAY
   -
     name: TiltLink
     parent: PanLink
-    translation: [ 0, 0, 0.1 ]
+    translation: [ 0, 0, 0.08 ]
     joint_name: TiltJoint
     joint_type: revolute
     joint_id: 3
@@ -77,6 +73,17 @@ links:
                0,    0.01, 0,
                0,    0,    0.01 ]
     elements:
+      -
+        type: Shape
+        rotation: [ 1, 0, 0, 90 ]
+        geometry:
+          type: Cylinder
+          radius: 0.06
+          height: 0.02
+        appearance:
+          material:
+            diffuse: [ 1, 1, 1 ]
+      # sensors
       -
         type: Transform
         translation: [ 0, 0, 0.0287 ]
@@ -102,10 +109,10 @@ links:
               height: 0.0727
             appearance:
               material:
-                diffuseColor: [ 0, 0, 1 ]
+                diffuse: [ 0, 0, 1 ]
       -
         type: Transform
-        translation: [ 0, 0, 0.1 ]
+        translation: [ 0.06, 0, -0.02 ]
         elements:
           -
             type: Camera
@@ -120,27 +127,38 @@ links:
             detection_rate: 0.9
             error_deviation: 0.005
           -
-            type: Resource
-            rotation: [ [ 0, 1, 0, 90 ], [ 0, 0, 1, 90 ] ]
-            uri: "../meshes/d435.dae"
-            appearance:
-              material:
-                diffuseColor: [ 0, 0, 1 ]
+            type: Transform
+            translation: [ -0.012, 0, 0 ]
+            elements:
+              -
+                type: Shape
+                geometry:
+                  type: Box
+                  size: [ 0.024, 0.064, 0.022 ]
+                appearance: *GRAY
+              -
+                type: Shape
+                translation: [ 0, 0.032, 0 ]
+                rotation: [ 0, 0, 1, 90 ]
+                geometry:
+                  type: Cylinder
+                  radius: 0.011
+                  height: 0.024
+                appearance: *GRAY
+              -
+                type: Shape
+                translation: [ 0, -0.032, 0 ]
+                rotation: [ 0, 0, 1, 90 ]
+                geometry:
+                  type: Cylinder
+                  radius: 0.011
+                  height: 0.024
+                appearance: *GRAY
+      # light
       -
         type: Transform
-        translation: [ 0, 0, 0 ]
+        translation: [ 0.065, 0, 0 ]
         elements:
-          -
-            type: Shape
-            translation: [ 0, 0, -0.02 ]
-            rotation: [ 1, 0, 0, 90 ]
-            geometry:
-              type: Cylinder
-              radius: 0.06
-              height: 0.02
-            appearance:
-              material:
-                diffuseColor: [ 1, 1, 1 ]
           -
             type: SpotLight
             name: Light
@@ -150,6 +168,17 @@ links:
             cut_off_exponent: 6
             attenuation: [ 1, 0, 0.01 ]
             on: true
+          -
+            type: Shape
+            translation: [ -0.005, 0, 0 ]
+            rotation: [ 0, 0, 1, 90 ]
+            geometry:
+              type: Cylinder
+              radius: 0.008
+              height: 0.01
+            appearance:
+              material:
+                diffuse: [ 1, 1, 0 ]
   -
     name: RightWheel
     parent: Chassis
