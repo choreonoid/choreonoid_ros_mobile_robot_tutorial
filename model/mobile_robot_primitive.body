@@ -1,18 +1,18 @@
 format: ChoreonoidBody
-formatVersion: 1.0
-angleUnit: degree
+format_version: 1.0
+angle_unit: degree
 name: MobileRobot
-rootLink: Chassis
+root_link: Chassis
 
 links:
   -
     name: Chassis
     joint_type: free
-    center_of_mass: [ -0.06, 0, 0.076 ]
+    center_of_mass: [ -0.06, 0, 0.08 ]
     mass: 14.0
-    inertia: [ 0.11, 0,     0,
-               0,     0.20, 0,
-               0,     0,     0.27 ]
+    inertia: [ 0.1,   0,     0,
+               0,     0.17,  0,
+               0,     0,     0.22 ]
     material: Slider
     elements:
       -
@@ -31,15 +31,15 @@ links:
   -
     name: RightWheel
     parent: Chassis
-    translation: [ 0, -0.14, 0.076 ]
+    translation: [ 0, -0.145, 0.076 ]
     joint_type: revolute
     joint_id: 0
     joint_axis: [ 0, 1, 0 ]
     center_of_mass: [ 0, 0, 0 ]
     mass: 0.8
-    inertia: [ 0.01, 0, 0,
-               0,    0.02, 0,
-               0,    0,    0.01 ]
+    inertia: [ 0.0012, 0,      0,
+               0,      0.0023, 0,
+               0,      0,      0.0012 ]
     material: Tire
     elements:
       - &TireShape
@@ -55,15 +55,15 @@ links:
   -
     name: LeftWheel
     parent: Chassis
-    translation: [ 0, 0.142, 0.076 ]
+    translation: [ 0, 0.145, 0.076 ]
     joint_type: revolute
     joint_id: 1
     joint_axis: [ 0, 1, 0 ]
     center_of_mass: [ 0, 0, 0 ]
     mass: 0.8
-    inertia: [ 0.01, 0, 0,
-               0,    0.02, 0,
-               0,    0,    0.01 ]
+    inertia: [ 0.0012, 0,      0,
+               0,      0.0023, 0,
+               0,      0,      0.0012 ]
     material: Tire
     elements:
       - *TireShape
