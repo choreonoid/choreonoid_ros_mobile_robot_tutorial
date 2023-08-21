@@ -22,7 +22,7 @@ items:
           class: BodyItem
           is_checked: true
           data: 
-            file: "${HOME}/catkin_ws/src/choreonoid_ros_mobile_robot_tutorial/robot/mobile_robot_mesh.body"
+            file: "${HOME}/catkin_ws/src/choreonoid_ros_mobile_robot_tutorial/model/mobile_robot.body"
             format: CHOREONOID-BODY
             rootPosition: [ 0, 0, 0 ]
             rootAttitude: [ 

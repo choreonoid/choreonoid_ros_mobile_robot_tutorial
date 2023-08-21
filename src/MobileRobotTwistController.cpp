@@ -48,8 +48,8 @@ void MobileRobotTwistController::commandCallback(const geometry_msgs::Twist& msg
 bool MobileRobotTwistController::control()
 {
     constexpr double wheelRadius = 0.076;
-    constexpr double halfAxleWidth = 0.142;
-    constexpr double kdd = 5.0;
+    constexpr double halfAxleWidth = 0.145;
+    constexpr double kdd = 0.5;
     double dq_target[2];
     
     {
