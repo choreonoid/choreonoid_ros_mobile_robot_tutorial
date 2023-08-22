@@ -1,7 +1,0 @@
-<launch>
-  <node pkg="joy" type="joy_node" name="joy" respawn="true">
-  </node>
-  <node pkg="teleop_twist_joy" type="teleop_node" name="teleop_node">
-    <param name="scale_angular" value="2.0" />
-  </node>
-</launch>
