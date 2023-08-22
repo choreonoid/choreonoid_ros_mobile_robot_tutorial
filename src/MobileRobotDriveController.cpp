@@ -3,7 +3,7 @@
 #include <geometry_msgs/Twist.h>
 #include <mutex>
 
-class MobileRobotTwistController : public cnoid::SimpleController
+class MobileRobotDriveController : public cnoid::SimpleController
 {
 public:
     virtual bool initialize(cnoid::SimpleControllerIO* io) override;
@@ -18,9 +18,9 @@ private:
     std::mutex commandMutex;
 };
 
-CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(MobileRobotTwistController)
+CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(MobileRobotDriveController)
 
-bool MobileRobotTwistController::initialize(cnoid::SimpleControllerIO* io)
+bool MobileRobotDriveController::initialize(cnoid::SimpleControllerIO* io)
 {
     auto body = io->body();
     wheels[0] = body->joint("RightWheel");
@@ -32,24 +32,24 @@ bool MobileRobotTwistController::initialize(cnoid::SimpleControllerIO* io)
         io->enableOutput(wheel, JointTorque);
     }
 
-    node = std::make_unique<ros::NodeHandle>(body->name());
+    node = std::make_unique<ros::NodeHandle>();
     subscriber = node->subscribe(
-        "/cmd_vel", 1, &MobileRobotTwistController::commandCallback, this);
+        "/cmd_vel", 1, &MobileRobotDriveController::commandCallback, this);
     
     return true;
 }
 
-void MobileRobotTwistController::commandCallback(const geometry_msgs::Twist& msg)
+void MobileRobotDriveController::commandCallback(const geometry_msgs::Twist& twist)
 {
     std::lock_guard<std::mutex> lock(commandMutex);
-    command = msg;
+    command = twist;
 }
 
-bool MobileRobotTwistController::control()
+bool MobileRobotDriveController::control()
 {
     constexpr double wheelRadius = 0.076;
     constexpr double halfAxleWidth = 0.145;
-    constexpr double kdd = 0.5;
+    constexpr double kd = 0.5;
     double dq_target[2];
     
     {
@@ -62,7 +62,7 @@ bool MobileRobotTwistController::control()
     
     for(int i=0; i < 2; ++i){
         auto wheel = wheels[i];
-        wheel->u() = kdd * (dq_target[i] - wheel->dq());
+        wheel->u() = kd * (dq_target[i] - wheel->dq());
     }
     
     return true;

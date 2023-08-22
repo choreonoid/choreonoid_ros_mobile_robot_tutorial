@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="joy" type="joy_node" name="joy" respawn="true" />
+  <rosparam command="load" file="$(find choreonoid_ros_mobile_robot_tutorial)/config/joy_teleop_all.yaml"/>
+  <node pkg="joy_teleop" type="joy_teleop.py" name="joy_teleop" />
+  <node pkg="choreonoid_ros" type="choreonoid" name="chorenoid" args="--start-simulation $(find choreonoid_ros_mobile_robot_tutorial)/project/mobile_robot_drive_pantilt_control.cnoid" />
+</launch>

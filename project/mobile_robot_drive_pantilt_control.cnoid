@@ -22,21 +22,21 @@ items:
           class: BodyItem
           is_checked: true
           data: 
-            file: "${HOME}/catkin_ws/src/choreonoid_ros_mobile_robot_tutorial/model/mobile_robot.body"
+            file: "../model/mobile_robot_sensors.body"
             format: CHOREONOID-BODY
             rootPosition: [ 0, 0, 0 ]
             rootAttitude: [ 
               1, 0, 0, 
               0, 1, 0, 
               0, 0, 1 ]
-            jointDisplacements: [ 0, 0 ]
-            jointPositions: [ 0, 0 ]
+            jointDisplacements: [ 0, 0, 0, 0 ]
+            jointPositions: [ 0, 0, 0, 0 ]
             initialRootPosition: [ 0, 0, 0 ]
             initialRootAttitude: [ 
               1, 0, 0, 
               0, 1, 0, 
               0, 0, 1 ]
-            initialJointPositions: [ 0, 0 ]
+            initialJointPositions: [ 0, 0, 0, 0 ]
             fix_root: false
             collisionDetection: true
             selfCollisionDetection: false
@@ -46,18 +46,30 @@ items:
           children: 
             - 
               id: 3
-              name: "Controller"
+              name: "DriveController"
               plugin: Body
               class: SimpleControllerItem
               data: 
                 isNoDelayMode: false
                 controllerOptions: ""
-                controller: "MobileRobotTwistController"
+                controller: "MobileRobotDriveController"
+                base_directory: "Controller directory"
+                reloading: false
+                export_symbols: false
+            - 
+              id: 4
+              name: "PanTiltController"
+              plugin: Body
+              class: SimpleControllerItem
+              data: 
+                isNoDelayMode: false
+                controllerOptions: ""
+                controller: "MobileRobotPanTiltController"
                 base_directory: "Controller directory"
                 reloading: false
                 export_symbols: false
         - 
-          id: 4
+          id: 5
           name: "Floor"
           plugin: Body
           class: BodyItem
@@ -83,7 +95,7 @@ items:
             scene_sensitive: true
             zmp: [ 0, 0, 0 ]
         - 
-          id: 5
+          id: 6
           name: "AISTSimulator"
           plugin: Body
           class: AISTSimulatorItem
@@ -126,7 +138,7 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      expanded: [ 1, 2, 4 ]
+      expanded: [ 1, 2, 5 ]
   - 
     id: 2
     plugin: Base
@@ -283,7 +295,7 @@ Body:
         show_cm_projection: false
         show_zmp: false
       - 
-        body_item: 4
+        body_item: 5
         show_cm: false
         show_cm_projection: false
         show_zmp: false
@@ -299,17 +311,17 @@ viewAreas:
     contents: 
       type: splitter
       orientation: horizontal
-      sizes: [ 1414, 448 ]
+      sizes: [ 1301, 412 ]
       children: 
         - 
           type: splitter
           orientation: horizontal
-          sizes: [ 393, 1017 ]
+          sizes: [ 362, 935 ]
           children: 
             - 
               type: splitter
               orientation: vertical
-              sizes: [ 571, 570 ]
+              sizes: [ 437, 436 ]
               children: 
                 - 
                   type: pane
@@ -321,7 +333,7 @@ viewAreas:
             - 
               type: splitter
               orientation: vertical
-              sizes: [ 856, 285 ]
+              sizes: [ 655, 218 ]
               children: 
                 - 
                   type: pane
@@ -333,7 +345,7 @@ viewAreas:
         - 
           type: splitter
           orientation: vertical
-          sizes: [ 314, 827 ]
+          sizes: [ 240, 633 ]
           children: 
             - 
               type: pane
@@ -341,7 +353,7 @@ viewAreas:
             - 
               type: splitter
               orientation: vertical
-              sizes: [ 456, 367 ]
+              sizes: [ 349, 280 ]
               children: 
                 - 
                   type: pane
