@@ -43,6 +43,19 @@ items:
             lock_location: false
             scene_sensitive: true
             zmp: [ 0, 0, 0 ]
+          children: 
+            - 
+              id: 3
+              name: "DriveTester"
+              plugin: Body
+              class: SimpleControllerItem
+              data: 
+                isNoDelayMode: false
+                controllerOptions: ""
+                controller: "MobileRobotDriveTester"
+                base_directory: "Controller directory"
+                reloading: false
+                export_symbols: false
         - 
           id: 4
           name: "Floor"

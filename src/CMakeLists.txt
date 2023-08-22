@@ -1,4 +1,4 @@
-choreonoid_add_simple_controller(MobileRobotController MobileRobotController.cpp)
+choreonoid_add_simple_controller(MobileRobotDriveTester MobileRobotDriveTester.cpp)
 
 choreonoid_add_simple_controller(MobileRobotTwistController MobileRobotTwistController.cpp)
 target_link_libraries(MobileRobotTwistController ${roscpp_LIBRARIES})
