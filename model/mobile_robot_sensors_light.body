@@ -8,7 +8,7 @@ links:
   -
     name: Chassis
     joint_type: free
-    center_of_mass: [ -0.061, 0, -0.0020 ]
+    center_of_mass: [ -0.08, 0, -0.0020 ]
     mass: 14.0
     inertia: [ 0.11, 0,     0,
                0,     0.20, 0,
