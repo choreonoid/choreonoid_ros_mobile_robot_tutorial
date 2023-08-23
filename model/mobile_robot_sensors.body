@@ -63,8 +63,8 @@ links:
     joint_axis: [ 0, 0, 1 ]
     center_of_mass: [ 0, 0, 0.03 ]
     mass: 1.0
-    inertia: [ 0.002, 0,    0,
-               0,     0.02, 0,
+    inertia: [ 0.002, 0,     0,
+               0,     0.002, 0,
                0,     0,     0.003 ]
     elements:
       - 
@@ -76,20 +76,20 @@ links:
           material: { diffuse: [ 0.5, 0.5, 0.5 ] }
       -
         type: Transform
-        translation: [ 0, 0.07, 0.06 ]
+        translation: [ 0, 0.07, 0.065 ]
         elements: 
           - &PanFrame
             type: Shape
-            geometry: { type: Box, size: [ 0.02, 0.02, 0.12 ] }
+            geometry: { type: Box, size: [ 0.02, 0.02, 0.13 ] }
             appearance: *GRAY
       -
         type: Transform
-        translation: [ 0, -0.07, 0.06 ]
+        translation: [ 0, -0.07, 0.065 ]
         elements: *PanFrame
   -
     name: TiltLink
     parent: PanLink
-    translation: [ 0, 0, 0.11 ]
+    translation: [ 0, 0, 0.12 ]
     joint_name: TiltJoint
     joint_type: revolute
     joint_id: 3
@@ -108,7 +108,7 @@ links:
       # sensors
       -
         type: Transform
-        translation: [ 0, 0, 0.0287 ]
+        translation: [ 0, 0, 0.04585 ]
         elements:
           -
             type: RangeSensor
@@ -125,9 +125,9 @@ links:
           -
             type: Shape
             rotation: [ 1, 0, 0, 90 ]
-            geometry: { type: Cylinder, radius: 0.05165, height: 0.0727 }
+            geometry: { type: Cylinder, radius: 0.0516, height: 0.0717 }
             appearance:
-              material: { diffuse: [ 0, 0, 1 ] }
+              material: { diffuse: [ 0, 0, 1 ], specular: [ 1, 1, 1 ] }
       -
         type: Transform
         translation: [ 0.06, 0, -0.02 ]
@@ -151,7 +151,7 @@ links:
                 type: Shape
                 geometry: { type: Box, size: [ 0.024, 0.064, 0.022 ] }
                 appearance: &SILVER
-                  material: { diffuse: [ 0.8, 0.8, 0.8 ], specular: [ 1.0, 1.0, 1.0 ] }
+                  material: { diffuse: [ 0.8, 0.8, 0.8 ], specular: [ 1, 1, 1 ] }
               -
                 type: Transform
                 translation: [ 0, 0.032, 0 ]
