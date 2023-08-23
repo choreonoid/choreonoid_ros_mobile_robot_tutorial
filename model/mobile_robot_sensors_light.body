@@ -135,8 +135,7 @@ links:
           -
             type: Camera
             name: RealSense
-            rotation: [ [ 0, 1, 0, 90 ], [ 0 , 0, 1, -90 ] ]
-            optical_frame: cv
+            optical_frame: robotics
             format: COLOR_DEPTH
             field_of_view: 62
             width: 320
