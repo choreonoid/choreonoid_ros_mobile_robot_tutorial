@@ -47,7 +47,7 @@ void MobileRobotPanTiltController::commandCallback(const geometry_msgs::Vector3&
 
 bool MobileRobotPanTiltController::control()
 {
-    constexpr double kd = 0.5;
+    constexpr double kd = 0.1;
     double dq_target[2];
 
     {
