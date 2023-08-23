@@ -1,0 +1,4 @@
+<launch>
+  <include file="$(find choreonoid_ros_mobile_robot_tutorial)/launch/joy_teleop.launch"/>
+  <node pkg="choreonoid_ros" type="choreonoid" name="chorenoid" args="--start-simulation $(find choreonoid_ros_mobile_robot_tutorial)/project/mobile_robot_sensors_labo1.cnoid" />
+</launch>
