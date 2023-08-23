@@ -125,7 +125,7 @@ links:
           -
             type: Shape
             rotation: [ 1, 0, 0, 90 ]
-            geometry: { type: Cylinder, radius: 0.0516, height: 0.0717 }
+            geometry: { type: Cylinder, radius: 0.05165, height: 0.0717 }
             appearance:
               material: { diffuse: [ 0, 0, 1 ], specular: [ 1, 1, 1 ] }
       -
