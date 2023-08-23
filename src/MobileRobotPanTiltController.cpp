@@ -23,12 +23,12 @@ CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(MobileRobotPanTiltController)
 bool MobileRobotPanTiltController::initialize(cnoid::SimpleControllerIO* io)
 {
     auto body = io->body();
-    joints[0] = body->joint("PanLink");
-    joints[1] = body->joint("TiltLink");
+    joints[0] = body->joint("PanJoint");
+    joints[1] = body->joint("TiltJoint");
     for(int i = 0; i < 2; ++i){
         cnoid::Link* joint = joints[i];
         joint->setActuationMode(JointTorque);
-        io->enableInput(joint, JointAngle | JointVelocity);
+        io->enableInput(joint, JointVelocity);
         io->enableOutput(joint, JointTorque);
     }
 
