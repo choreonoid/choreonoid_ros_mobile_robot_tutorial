@@ -22,7 +22,7 @@ items:
           class: BodyItem
           is_checked: true
           data: 
-            file: "../model/mobile_robot_sensors.body"
+            file: "../model/mobile_robot_pantilt.body"
             format: CHOREONOID-BODY
             rootPosition: [ 0, 0, 0 ]
             rootAttitude: [ 
